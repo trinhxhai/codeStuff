@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript">
+		let ZodiacArr = new Array();
+		ZodiacArr=[
+					{
+						key:0,
+						zod: new Array("lower or equal","lower")
+					},
+					//1
+					// 22/12 => 19/1 : Ma kết
+					// 20/1 => 19/2  : Bảo Bình
+					{
+						key:19,
+						zod: new Array("Ma Kết","Bảo Bình")
+					},
+					//2
+					// 20/1 => 18/2  : Bảo Bình
+					// 19/2 => 20/3: Song ??? Ngư
+					{
+						key:18,
+						zod: new Array("Bảo Bình","Song")
+					},
+					//3
+					// 19/2 => 20/3: Song ??? Ngư
+					// 21/3 => 20/4 : Bạch Dương
+					{
+						key:20,
+						zod: new Array("Song","Bạch Dương")
+					},
+					// 4
+					// 21/3 => 20/4 : Bạch Dương
+					// 21/4 => 20/5  : Kim Ngưu
+					{
+						key:20,
+						zod: new Array("Bạch Dương","Kim Ngưu")
+					},
+					// 5
+					// 21/4 => 20/5  : Kim Ngưu
+					// 21/5 => 21/6 : Song Tử
+					{
+						key:20,
+						zod: new Array("Kim Ngưu","Song Tử")
+					},
+					// 6
+					// 21/5 => 21/6 : Song Tử
+					// 22/6 => 22/7 : Cự Giải
+					{
+						key:21,
+						zod: new Array("Song Tử","Cự Giải")
+					},
+					// 7
+					// 2/6 => 22/7 : Cự Giải
+					// 23/7 => 22/8 : Sư Tử
+					{
+						key:22,
+						zod: new Array("Cự Giải","Sư Tử")
+					},
+					// 8
+					// 23/7 => 22/8 : Sư Tử
+					// 23/8 => 22/9 : Xử Nữ
+					{
+						key:22,
+						zod: new Array("Sư Tử","Xử Nữ")
+					},
+					// 9
+					// 23/8 => 22/9 : Xử Nữ
+					// 23/9 => 23/10 : Thiên Bình
+					{
+						key:22,
+						zod: new Array("Xử Nữ","Thiên Bình")
+					},
+					// 10
+					// 23/9 => 23/10 : Thiên Bình
+					// 24/10 => 22/11 : Bọ Cạp
+					{
+						key:23,
+						zod: new Array("Thiên Bình","Bọ Cạp")
+					},
+					// 11
+					// 4/10 => 22/11 : Bọ Cạp
+					// 23/11 => 21/12 : Nhân Mã
+					{
+						key:22,
+						zod: new Array("Bọ Cạp","Nhân Mã")
+					},
+					// 12
+					// 23/11 => 21/12 : Nhân Mã
+					// 22/12=>19/1 : Ma Kết
+					{
+						key:21,
+						zod: new Array("Nhân Mã","Ma Kết")
+					},
+
+				];
+		function calZod(day,month){
+			let z = ZodiacArr[month];
+			if (day<=z.key)
+				return z.zod[0];
+			else return z.zod[1];
+		}
+		function process() {
+			let time = document.getElementById("inpDate").value.split('/');
+			console.log(time);
+			if(!validatTime(time)){
+				window.alert("Ngày tháng năm không hợp lệ, định dạng dd/mm/yy!")
+				return;
+			}
+
+			let inpDay = parseInt(time[0]);
+			let inpMonth = parseInt(time[1]);
+			console.log(calZod(inpDay,inpMonth));
+			document.getElementById("outZodiac").value = calZod(inpDay,inpMonth);
+		}
+		function validatTime(arr){
+			if (arr.length!=3) return false;
+			for(let i =0;i<3;i++) 
+				if(parseInt(arr[i])==NaN) return false;
+			let d = parseInt(arr[0]);
+			let m = parseInt(arr[1]);
+			if(d>31||d<=0) return false;
+			if(m>12||m<=0) return false;
+			if(m==2&&d>29) return false;
+			return true;
+		}
+		function clearInp(){
+			document.getElementById("inpDate").value="";
+			document.getElementById("outZodiac").value="";
+		}
+	</script>
+</head>
+<body>
+	<input type="text" name="" id="inpDate">
+	<input type="text" name="" id="outZodiac">
+	<button id="Xem" onclick="process()">Xem</button>
+	<button onclick="clearInp()" >Xóa</button>
+</body>
+</html>
